@@ -39,6 +39,8 @@
 #if defined(WIN32) && defined(_MSC_VER) && _MSC_VER < 1800
 #define NOMINMAX 1
 #include <windows.h>
+#else
+#include <stdint.h>
 #endif
 
 #ifndef WIN32
@@ -66,7 +68,9 @@ typedef unsigned __int32 uint32;
 typedef __int64 int64;
 typedef unsigned __int64 uint64;
 #else
-typedef long ssize_t;
+#ifdef WIN32
+typedef uint64_t ssize_t;
+#endif
 typedef int8_t int8;
 typedef uint8_t uint8;
 typedef int16_t int16;
